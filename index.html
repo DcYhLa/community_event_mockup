@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community Event Mockup - Community Events & Tai Chi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar-nav">
+        <nav class="nav">
+          <a href="#map" class="nav-link active" data-section="map">Map</a>
+          <a href="#resources" class="nav-link" data-section="resources"
+            >Resources</a
+          >
+          <a href="#events" class="nav-link" data-section="events">Events</a>
+          <a href="#community" class="nav-link" data-section="community"
+            >Community</a
+          >
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main">
+        <!-- Top Bar -->
+        <header class="top-bar">
+          <div class="header-actions">
+            <button class="btn btn-secondary" id="locationBtn">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="3" />
+                <path d="M12 2v2M12 20v2M2 12h2M20 12h2" />
+              </svg>
+              <span>My Location</span>
+            </button>
+            <button class="btn btn-primary" id="createEventBtn">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              <span>Create Event</span>
+            </button>
+          </div>
+        </header>
+        <!-- Map Section -->
+        <section id="map" class="section active">
+          <div class="section-header">
+            <div>
+              <h1 class="section-title">Community Map</h1>
+              <p class="section-subtitle">Find people and events near you</p>
+            </div>
+            <div class="map-controls">
+              <div class="filter-group">
+                <label class="filter-label">View</label>
+                <select class="filter-select" id="mapViewFilter">
+                  <option value="all">All</option>
+                  <option value="practitioners">Practitioners</option>
+                  <option value="events">Events</option>
+                  <option value="groups">Groups</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label class="filter-label">Radius</label>
+                <select class="filter-select" id="radiusFilter">
+                  <option value="5">5 km</option>
+                  <option value="15" selected>15 km</option>
+                  <option value="30">30 km</option>
+                  <option value="50">50 km</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="map-layout">
+            <div class="map-panel" id="mapPanel">
+              <div
+                id="map"
+                style="background: url(map.jpg) center/cover no-repeat #e8ebef"
+              ></div>
+              <div class="map-legend" id="mapLegend"></div>
+            </div>
+            <aside class="sidebar" id="mapSidebar">
+              <div class="sidebar-header">
+                <h2>Nearby</h2>
+                <span class="count-badge" id="nearbyCount">0</span>
+              </div>
+              <div class="filter-panel">
+                <h3>Filters</h3>
+                <div class="filter-section">
+                  <label class="filter-title">Age Group</label>
+                  <div class="chip-group" id="ageGroupChips">
+                    <button class="chip active" data-age="all">All Ages</button>
+                    <button class="chip" data-age="18-25">18-25</button>
+                    <button class="chip" data-age="26-35">26-35</button>
+                    <button class="chip" data-age="36-50">36-50</button>
+                    <button class="chip" data-age="51-65">51-65</button>
+                    <button class="chip" data-age="65+">65+</button>
+                  </div>
+                </div>
+                <div class="filter-section">
+                  <label class="filter-title">Activities</label>
+                  <div class="chip-group" id="interestChips">
+                    <button class="chip active" data-interest="all">All</button>
+                    <button class="chip" data-interest="tai-chi">
+                      Tai Chi
+                    </button>
+                    <button class="chip" data-interest="qigong">Qigong</button>
+                    <button class="chip" data-interest="meditation">
+                      Meditation
+                    </button>
+                    <button class="chip" data-interest="martial-arts">
+                      Martial Arts
+                    </button>
+                    <button class="chip" data-interest="wellness">
+                      Wellness
+                    </button>
+                  </div>
+                </div>
+                <div class="filter-section">
+                  <label class="filter-title">Experience</label>
+                  <div class="chip-group" id="experienceChips">
+                    <button class="chip active" data-exp="all">
+                      All Levels
+                    </button>
+                    <button class="chip" data-exp="beginner">Beginner</button>
+                    <button class="chip" data-exp="intermediate">
+                      Intermediate
+                    </button>
+                    <button class="chip" data-exp="advanced">Advanced</button>
+                  </div>
+                </div>
+                <div class="filter-section">
+                  <label class="filter-title">Event Type</label>
+                  <div class="chip-group" id="eventTypeChips">
+                    <button class="chip active" data-type="all">
+                      All Types
+                    </button>
+                    <button class="chip" data-type="class">Classes</button>
+                    <button class="chip" data-type="workshop">Workshops</button>
+                    <button class="chip" data-type="retreat">Retreats</button>
+                    <button class="chip" data-type="social">Social</button>
+                    <button class="chip" data-type="outdoor">Outdoor</button>
+                  </div>
+                </div>
+              </div>
+              <div class="results-list" id="resultsList"></div>
+            </aside>
+          </div>
+        </section>
+
+        <!-- Resources Section -->
+        <!-- resources: tai chi / qigong / organizing -->
+        <section id="resources" class="section">
+          <div class="section-header">
+            <div>
+              <h1 class="section-title">Resources</h1>
+            </div>
+            <div class="resource-tabs" id="resourceTabs">
+              <button class="tab-btn active" data-tab="tai-chi">Tai Chi</button>
+              <button class="tab-btn" data-tab="qigong">Qigong</button>
+              <button class="tab-btn" data-tab="organizing">
+                Event Organizing
+              </button>
+              <button class="tab-btn" data-tab="teaching">Teaching</button>
+            </div>
+          </div>
+          <div class="resources-grid" id="resourcesGrid"></div>
+        </section>
+
+        <!-- Events Section -->
+        <!-- events grid with sort -->
+        <section id="events" class="section">
+          <div class="section-header">
+            <div>
+              <h1 class="section-title">Upcoming Events</h1>
+              <p class="section-subtitle">Join the community</p>
+            </div>
+            <div class="events-controls">
+              <select class="filter-select" id="eventsSort">
+                <option value="date">Sort by Date</option>
+                <option value="distance">Sort by Distance</option>
+                <option value="popularity">Most Popular</option>
+                <option value="price">Price: Low to High</option>
+              </select>
+              <button class="btn btn-outline" id="loadMoreEvents">
+                Load More
+              </button>
+            </div>
+          </div>
+          <div class="events-grid" id="eventsGrid"></div>
+        </section>
+
+        <!-- Community Section -->
+        <!-- community stats and groups -->
+        <section id="community" class="section">
+          <div class="section-header">
+            <div>
+              <h1 class="section-title">Community</h1>
+              <p class="section-subtitle">Connect with other people</p>
+            </div>
+          </div>
+          <div class="community-layout">
+            <div class="community-stats">
+              <div class="stat-card">
+                <span class="stat-number" id="totalMembers">0</span>
+                <span class="stat-label">Active Members</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-number" id="totalGroups">0</span>
+                <span class="stat-label">Practice Groups</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-number" id="totalEvents">0</span>
+                <span class="stat-label">Events This Month</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-number" id="totalCountries">0</span>
+                <span class="stat-label">Countries</span>
+              </div>
+            </div>
+            <div class="community-groups" id="communityGroups"></div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Detail Modal -->
+      <div class="modal-overlay" id="detailModal">
+        <div class="modal" id="modalContent">
+          <button class="modal-close" id="modalClose">&times;</button>
+          <div class="modal-body" id="modalBody"></div>
+        </div>
+      </div>
+
+      <!-- Create Event Modal -->
+      <div class="modal-overlay" id="createEventModal">
+        <div class="modal modal-large" id="createEventContent">
+          <button class="modal-close" id="createEventClose">&times;</button>
+          <div class="modal-body">
+            <h2 class="modal-title">Create New Event</h2>
+            <form id="createEventForm" class="event-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Event Title</label>
+                  <input
+                    type="text"
+                    name="title"
+                    placeholder="e.g., Sunrise Tai Chi in the Park"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Event Type</label>
+                  <select name="type" required>
+                    <option value="">Select type</option>
+                    <option value="class">Regular Class</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="retreat">Retreat</option>
+                    <option value="social">Social Gathering</option>
+                    <option value="outdoor">Outdoor Practice</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Date</label>
+                  <input type="date" name="date" required />
+                </div>
+                <div class="form-group">
+                  <label>Time</label>
+                  <input type="time" name="time" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Location</label>
+                <input
+                  type="text"
+                  name="location"
+                  placeholder="Venue name, address, or 'Online'"
+                  required
+                />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Age Group</label>
+                  <select name="ageGroup" required>
+                    <option value="">Select age group</option>
+                    <option value="all">All Ages</option>
+                    <option value="18-25">18-25</option>
+                    <option value="26-35">26-35</option>
+                    <option value="36-50">36-50</option>
+                    <option value="51-65">51-65</option>
+                    <option value="65+">65+</option>
+                    <option value="family">Family Friendly</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Experience Level</label>
+                  <select name="level" required>
+                    <option value="">Select level</option>
+                    <option value="beginner">Beginner Friendly</option>
+                    <option value="intermediate">Medium</option>
+                    <option value="advanced">Advanced</option>
+                    <option value="all">All Levels</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <textarea
+                  name="description"
+                  rows="4"
+                  placeholder="Describe what participants can expect..."
+                  required
+                ></textarea>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Max Participants</label>
+                  <input
+                    type="number"
+                    name="maxParticipants"
+                    min="1"
+                    placeholder="No limit"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Tags</label>
+                <div class="tag-input" id="tagInput">
+                  <input
+                    type="text"
+                    name="tags"
+                    placeholder="Add tags (tai-chi, qigong, outdoor, beginner...)"
+                  />
+                  <div class="tag-list" id="tagList"></div>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  id="cancelCreateEvent"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  Create Event
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toast Container -->
+      <div class="toast-container" id="toastContainer"></div>
+    </div>
+
+    <script
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <!-- initialize map, render events, filter users, open modals -->
+    <script src="app.js"></script>
+  </body>
+</html>
